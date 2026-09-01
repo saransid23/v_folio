@@ -20,7 +20,16 @@ export default function Contact() {
 
     const ctx = gsap.context(() => {
       gsap.set(cardRef.current, { opacity: 0 });
-      gsap.set(textRef.current, { y: 40, opacity: 0, filter: "blur(15px)" });
+      
+      const letters = gsap.utils.toArray(".name-letter", textRef.current);
+      gsap.set(letters, {
+        opacity: 0,
+        x: () => gsap.utils.random(-100, 100),
+        y: () => gsap.utils.random(-100, 100),
+        rotation: () => gsap.utils.random(-60, 60),
+        scale: () => gsap.utils.random(0.2, 3),
+        filter: "blur(10px)",
+      });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -35,13 +44,17 @@ export default function Contact() {
         opacity: 1,
         duration: 0.2,
       })
-      // Text elegant blur fade-in
-      .to(textRef.current, {
+      // Letters fly in and shake together
+      .to(letters, {
+        x: 0,
         y: 0,
+        rotation: 0,
+        scale: 1,
         opacity: 1,
         filter: "blur(0px)",
-        duration: 1.8,
-        ease: "power3.out",
+        duration: 2.5,
+        ease: "elastic.out(1, 0.3)",
+        stagger: 0.04,
       }, 0);
 
     }, sectionRef);
@@ -129,9 +142,18 @@ export default function Contact() {
 
           <h1
             ref={textRef}
-            className="font-sans font-black uppercase text-white text-[10vw] md:text-[8vw] lg:text-[7vw] leading-none tracking-[-0.02em] select-none whitespace-nowrap"
+            className="font-sans font-black uppercase text-white text-[10vw] md:text-[8vw] lg:text-[7vw] leading-none tracking-[-0.02em] select-none whitespace-nowrap flex gap-[2vw] md:gap-[1.5vw] justify-center"
           >
-            SARAN SIDDARTH
+            <div className="flex">
+              {"SARAN".split("").map((char, i) => (
+                <span key={`saran-${i}`} className="name-letter inline-block">{char}</span>
+              ))}
+            </div>
+            <div className="flex">
+              {"SIDDARTH".split("").map((char, i) => (
+                <span key={`siddarth-${i}`} className="name-letter inline-block">{char}</span>
+              ))}
+            </div>
           </h1>
         </div>
       </div>
