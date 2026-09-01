@@ -17,6 +17,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://madebysaran.vercel.app/"),
   title: "Saran Siddarth — Filmmaker & Visual Storyteller",
   description:
     "World-class cinematic portfolio of Saran Siddarth — filmmaker, cinematographer, and visual storyteller creating luxury brand films, documentaries, and short films.",
