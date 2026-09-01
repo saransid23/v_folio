@@ -28,14 +28,14 @@ export default function Contact() {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: mainText,
-          start: "top 90%",
+          trigger: sectionRef.current,
+          start: "bottom 100%",
           once: true,
         },
       });
 
       // Shimmering light sweep on text (continuous)
-      gsap.to(mainText, {
+      gsap.to([line1, line2], {
         backgroundPositionX: "200%",
         duration: 6,
         repeat: -1,
@@ -169,17 +169,28 @@ export default function Contact() {
         </div>
 
         {/* Main foreground text with masking and shimmering metallic gradient */}
-        <h1 className="main-name-text font-sans font-black uppercase text-[12vw] md:text-[11vw] lg:text-[10vw] leading-[0.85] tracking-[-0.03em] text-center select-none relative z-10 text-transparent bg-clip-text"
-            style={{
-              backgroundImage: "linear-gradient(90deg, #ffffff 0%, #777777 20%, #ffffff 40%, #ffffff 60%, #777777 80%, #ffffff 100%)",
-              backgroundSize: "200% auto",
-            }}
-        >
+        <h1 className="main-name-text font-sans font-black uppercase text-[12vw] md:text-[11vw] lg:text-[10vw] leading-[0.85] tracking-[-0.03em] text-center select-none relative z-10">
           <div className="overflow-hidden pb-2" style={{ perspective: "1000px" }}>
-            <div className="name-line-1 inline-block will-change-transform">SARAN</div>
+            <div 
+              className="name-line-1 inline-block will-change-transform text-transparent bg-clip-text"
+              style={{
+                backgroundImage: "linear-gradient(90deg, #ffffff 0%, #777777 20%, #ffffff 40%, #ffffff 60%, #777777 80%, #ffffff 100%)",
+                backgroundSize: "200% auto",
+              }}
+            >
+              SARAN
+            </div>
           </div>
           <div className="overflow-hidden pt-1" style={{ perspective: "1000px" }}>
-            <div className="name-line-2 inline-block will-change-transform">SIDDARTH</div>
+            <div 
+              className="name-line-2 inline-block will-change-transform text-transparent bg-clip-text"
+              style={{
+                backgroundImage: "linear-gradient(90deg, #ffffff 0%, #777777 20%, #ffffff 40%, #ffffff 60%, #777777 80%, #ffffff 100%)",
+                backgroundSize: "200% auto",
+              }}
+            >
+              SIDDARTH
+            </div>
           </div>
         </h1>
 
