@@ -11,17 +11,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
-  const frameRef = useRef<HTMLDivElement>(null);
+
   const textRef = useRef<HTMLHeadingElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!sectionRef.current || !textRef.current || !frameRef.current || !cardRef.current) return;
+    if (!sectionRef.current || !textRef.current || !cardRef.current) return;
 
     const ctx = gsap.context(() => {
       gsap.set(cardRef.current, { opacity: 0 });
-      gsap.set(textRef.current, { scale: 3, opacity: 0 });
-      gsap.set(frameRef.current, { scaleX: 0, opacity: 0 });
+      gsap.set(textRef.current, { y: 40, opacity: 0, filter: "blur(15px)" });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -31,28 +30,19 @@ export default function Contact() {
         },
       });
 
-      // 1. Card container fades in
+      // Card container appears
       tl.to(cardRef.current, {
         opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
+        duration: 0.2,
       })
-
-      // 2. Text zooms down from large to final — the Marvel zoom
+      // Text elegant blur fade-in
       .to(textRef.current, {
-        scale: 1,
+        y: 0,
         opacity: 1,
-        duration: 1.4,
-        ease: "power4.out",
-      }, 0.1)
-
-      // 3. Frame border slices open from center
-      .to(frameRef.current, {
-        scaleX: 1,
-        opacity: 1,
-        duration: 0.8,
-        ease: "expo.out",
-      }, 0.6);
+        filter: "blur(0px)",
+        duration: 1.8,
+        ease: "power3.out",
+      }, 0);
 
     }, sectionRef);
 
@@ -136,12 +126,7 @@ export default function Contact() {
       {/* Marvel Title Card — bottom of the same page */}
       <div className="w-full flex items-center justify-center pb-16 md:pb-20 relative z-10">
         <div ref={cardRef} className="relative flex items-center justify-center opacity-0">
-          {/* Tight rectangular frame */}
-          <div
-            ref={frameRef}
-            className="absolute border-[2px] md:border-[3px] border-white"
-            style={{ inset: "-8px -14px", transformOrigin: "center" }}
-          />
+
           <h1
             ref={textRef}
             className="font-sans font-black uppercase text-white text-[10vw] md:text-[8vw] lg:text-[7vw] leading-none tracking-[-0.02em] select-none whitespace-nowrap"
