@@ -25,7 +25,7 @@ export default function Contact() {
     <section
       ref={sectionRef}
       id="contact"
-      className="min-h-dvh px-6 md:px-12 bg-accent relative overflow-hidden border-t border-white/15 flex flex-col"
+      className="min-h-dvh lg:h-dvh px-6 md:px-12 bg-accent relative overflow-hidden border-t border-white/15 flex flex-col"
     >
       {/* Background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
