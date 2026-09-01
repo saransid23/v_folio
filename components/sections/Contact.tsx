@@ -16,68 +16,6 @@ export default function Contact() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Premium Kinetic Typography Reveal
-      
-      const line1 = sectionRef.current?.querySelector(".name-line-1");
-      const line2 = sectionRef.current?.querySelector(".name-line-2");
-      const bgText = sectionRef.current?.querySelector(".floating-bg-text");
-      const mainText = sectionRef.current?.querySelector(".main-name-text");
-
-      gsap.set([line1, line2], { yPercent: 120, rotationX: -80, opacity: 0, transformOrigin: "50% 100% -50px" });
-      gsap.set(bgText, { scale: 0.8, opacity: 0, rotationZ: -5 });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "bottom 100%",
-          once: true,
-        },
-      });
-
-      // Shimmering light sweep on text (continuous)
-      gsap.to([line1, line2], {
-        backgroundPositionX: "200%",
-        duration: 6,
-        repeat: -1,
-        ease: "linear",
-      });
-
-      // 3D rotation and reveal of the main text
-      tl.to(line1, {
-        yPercent: 0,
-        rotationX: 0,
-        opacity: 1,
-        duration: 1.4,
-        ease: "power4.out",
-      })
-      .to(line2, {
-        yPercent: 0,
-        rotationX: 0,
-        opacity: 1,
-        duration: 1.4,
-        ease: "power4.out",
-      }, 0.15)
-      
-      // Floating massive background text appears
-      .to(bgText, {
-        scale: 1.1,
-        opacity: 0.15,
-        rotationZ: 0,
-        duration: 3,
-        ease: "power3.out",
-      }, 0)
-      
-      // Infinite slow float for background text
-      .to(bgText, {
-        scale: 1.15,
-        rotationZ: 2,
-        yPercent: -5,
-        duration: 10,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      }, 3);
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -155,45 +93,6 @@ export default function Contact() {
             </SectionReveal>
           </div>
         </div>
-      </div>
-
-      {/* Premium End Card — Cinematic Typography */}
-      <div className="w-full min-h-[50vh] md:min-h-[70vh] flex items-center justify-center relative z-10 overflow-hidden perspective-[1200px] mt-12 md:mt-20">
-        
-        {/* Deep background glowing hollow text */}
-        <div 
-          className="floating-bg-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-sans font-black uppercase text-transparent text-[25vw] leading-[0.8] tracking-tighter text-center pointer-events-none blur-[4px] mix-blend-screen whitespace-nowrap"
-          style={{ WebkitTextStroke: "2px rgba(255, 255, 255, 0.4)" }}
-        >
-          SARAN<br/>SIDDARTH
-        </div>
-
-        {/* Main foreground text with masking and shimmering metallic gradient */}
-        <h1 className="main-name-text font-sans font-black uppercase text-[12vw] md:text-[11vw] lg:text-[10vw] leading-[0.85] tracking-[-0.03em] text-center select-none relative z-10">
-          <div className="overflow-hidden pb-2" style={{ perspective: "1000px" }}>
-            <div 
-              className="name-line-1 inline-block will-change-transform text-transparent bg-clip-text"
-              style={{
-                backgroundImage: "linear-gradient(90deg, #ffffff 0%, #777777 20%, #ffffff 40%, #ffffff 60%, #777777 80%, #ffffff 100%)",
-                backgroundSize: "200% auto",
-              }}
-            >
-              SARAN
-            </div>
-          </div>
-          <div className="overflow-hidden pt-1" style={{ perspective: "1000px" }}>
-            <div 
-              className="name-line-2 inline-block will-change-transform text-transparent bg-clip-text"
-              style={{
-                backgroundImage: "linear-gradient(90deg, #ffffff 0%, #777777 20%, #ffffff 40%, #ffffff 60%, #777777 80%, #ffffff 100%)",
-                backgroundSize: "200% auto",
-              }}
-            >
-              SIDDARTH
-            </div>
-          </div>
-        </h1>
-
       </div>
     </section>
   );
