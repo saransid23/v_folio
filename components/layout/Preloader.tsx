@@ -63,7 +63,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/favicon.png"
+          src="/logo.png"
           alt="Logo"
           className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain"
         />
