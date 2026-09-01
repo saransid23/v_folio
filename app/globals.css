@@ -1,0 +1,624 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS — Cinematic Filmmaker Portfolio
+   ============================================================ */
+@theme {
+  /* Il Capo Production inspired palette — Red dominant */
+  --color-background: #D60001;
+  --color-secondary-bg: #B80000;
+  --color-foreground: #FFFFFF;
+  --color-text-red: #D60001;
+  --color-text-white: #FFFFFF;
+  --color-secondary: #FFFFFF;
+  --color-accent: #D60001;
+  --color-accent-dark: #990000;
+  --color-gold: #D6B36A;
+  --color-border: rgba(255,255,255,0.15);
+  --color-glass: rgba(214, 0, 1, 0.9);
+  --color-glass-light: rgba(255, 255, 255, 0.08);
+  --color-surface: #B80000;
+  --color-muted: rgba(255,255,255,0.5);
+  --color-white: #FFFFFF;
+
+  /* Typography */
+  --font-sans: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+  --font-display: var(--font-display, ui-serif, Georgia, serif);
+  --font-mono: var(--font-mono, ui-monospace, monospace);
+
+  /* Easing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-cinema: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* Animations */
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-grain: grain 10s steps(10) infinite;
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 45s linear infinite;
+  --animate-spin-slow: spin 30s linear infinite;
+  --animate-flicker: flicker 0.15s ease-in-out infinite alternate;
+  --animate-scan: scan 3s linear infinite;
+  --animate-breathe: breathe 4s ease-in-out infinite;
+  --animate-scroll-indicator: scroll-indicator 2s ease-in-out infinite;
+
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+* {
+  cursor: none !important;
+}
+
+@media (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #050505;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* ============================================================
+   FILM GRAIN OVERLAY
+   ============================================================ */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  animation: var(--animate-grain);
+  mix-blend-mode: overlay;
+}
+
+/* Vignette overlay */
+.vignette-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+/* ============================================================
+   SCROLL PROGRESS BAR — film strip style
+   ============================================================ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--color-accent);
+  z-index: 10000;
+  transform-origin: left;
+  will-change: transform;
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.8);
+}
+
+/* ============================================================
+   GLASSMORPHISM
+   ============================================================ */
+.glass {
+  background: rgba(5, 5, 5, 0.8);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+}
+
+/* ============================================================
+   CUSTOM CURSOR — cinematic rings
+   ============================================================ */
+.custom-cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  pointer-events: none;
+  z-index: 99999;
+  will-change: transform;
+  transition: width 0.3s var(--ease-out-expo),
+              height 0.3s var(--ease-out-expo),
+              background-color 0.3s ease,
+              opacity 0.3s ease;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  z-index: 99998;
+  will-change: transform;
+  transition: width 0.4s var(--ease-out-expo),
+              height 0.4s var(--ease-out-expo),
+              opacity 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.cursor-ring-outer {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+  z-index: 99997;
+  will-change: transform;
+  transition: width 0.6s var(--ease-out-expo),
+              height 0.6s var(--ease-out-expo),
+              opacity 0.3s ease;
+}
+
+.cursor-glow {
+  position: fixed;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent 70%);
+  pointer-events: none;
+  z-index: 99996;
+  will-change: transform;
+  filter: blur(20px);
+}
+
+.cursor-text {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0;
+  will-change: transform, opacity;
+  font-family: var(--font-sans);
+}
+
+/* Cursor hover states */
+.cursor-hover .custom-cursor {
+  width: 6px;
+  height: 6px;
+  background-color: #ffffff;
+}
+.cursor-hover .cursor-ring {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.cursor-hover .cursor-ring-outer {
+  width: 80px;
+  height: 80px;
+  opacity: 0.5;
+}
+
+@media (pointer: coarse) {
+  .custom-cursor,
+  .cursor-ring,
+  .cursor-ring-outer,
+  .cursor-glow,
+  .cursor-text {
+    display: none !important;
+  }
+}
+
+/* ============================================================
+   MAGNETIC BUTTON
+   ============================================================ */
+.magnetic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  will-change: transform;
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.magnetic-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s var(--ease-out-expo);
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.magnetic-btn:hover::before {
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+.magnetic-btn > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   HERO TYPOGRAPHY — cinematic editorial
+   ============================================================ */
+.hero-text {
+  font-size: clamp(3.5rem, 8.5vw, 8rem);
+  font-weight: 700;
+  line-height: 0.93;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+}
+
+.hero-text-outline {
+  -webkit-text-stroke: 1px rgba(245, 245, 240, 0.3);
+  color: transparent;
+}
+
+.editorial-serif {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.font-ivar {
+  font-family: var(--font-display);
+}
+
+.font-helvetica {
+  font-family: var(--font-sans);
+}
+
+.film-title {
+  font-size: clamp(4rem, 10vw, 10rem);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+}
+
+.services-title {
+  font-size: clamp(3rem, 9vw, 9rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+}
+
+/* ============================================================
+   SECTION STYLING — cinematic breathing room
+   ============================================================ */
+.section-padding {
+  padding: 5rem 2rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 7rem 4rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-padding {
+    padding: 9rem 6rem;
+  }
+}
+
+.section-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.section-label::before {
+  content: "";
+  display: inline-block;
+  width: 3rem;
+  height: 1px;
+  background: var(--color-accent);
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   PRELOADER — film frame style
+   ============================================================ */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  color: #F5F5F0;
+}
+
+.preloader-frame-text {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.preloader-final {
+  font-family: var(--font-sans);
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+/* Scan lines for preloader */
+.scan-lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.3) 2px,
+    rgba(0, 0, 0, 0.3) 4px
+  );
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+/* ============================================================
+   FILM STRIP / TIMELINE DECORATION
+   ============================================================ */
+.film-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.film-hole {
+  width: 16px;
+  height: 22px;
+  border-radius: 3px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+}
+
+/* ============================================================
+   IMAGE REVEAL
+   ============================================================ */
+.image-reveal {
+  overflow: hidden;
+  position: relative;
+}
+
+.image-reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-background);
+  transform-origin: right;
+  will-change: transform;
+}
+
+/* ============================================================
+   CINEMATIC CARD
+   ============================================================ */
+.film-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.film-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============================================================
+   MARQUEE / INFINITE SCROLL
+   ============================================================ */
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: var(--animate-marquee);
+}
+
+.marquee-track-reverse {
+  display: flex;
+  white-space: nowrap;
+  animation: var(--animate-marquee-reverse);
+}
+
+/* ============================================================
+   GLOW EFFECTS
+   ============================================================ */
+.glow-red {
+  box-shadow: 0 0 40px rgba(229, 9, 20, 0.3), 0 0 80px rgba(229, 9, 20, 0.1);
+}
+
+.glow-red:hover {
+  box-shadow: 0 0 60px rgba(229, 9, 20, 0.5), 0 0 120px rgba(229, 9, 20, 0.2);
+}
+
+.text-glow-red {
+  text-shadow: 0 0 30px rgba(229, 9, 20, 0.6);
+}
+
+.glow-gold {
+  box-shadow: 0 0 40px rgba(214, 179, 106, 0.2);
+}
+
+/* ============================================================
+   TILT CARD
+   ============================================================ */
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  will-change: transform;
+}
+
+.tilt-card-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+}
+
+/* ============================================================
+   LENIS SMOOTH SCROLL
+   ============================================================ */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-12px) rotate(0.5deg); }
+  75% { transform: translateY(8px) rotate(-0.5deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.08); }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  100% { opacity: 0.85; }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+@keyframes film-burn {
+  0% { opacity: 0; transform: scale(1.5); filter: brightness(3) saturate(0); }
+  50% { opacity: 1; filter: brightness(1.5) saturate(0.5); }
+  100% { opacity: 1; transform: scale(1); filter: brightness(1) saturate(1); }
+}
+
+@keyframes chromatic-shift {
+  0% { text-shadow: 2px 0 rgba(229, 9, 20, 0.5), -2px 0 rgba(0, 100, 255, 0.3); }
+  50% { text-shadow: -2px 0 rgba(229, 9, 20, 0.5), 2px 0 rgba(0, 100, 255, 0.3); }
+  100% { text-shadow: 2px 0 rgba(229, 9, 20, 0.5), -2px 0 rgba(0, 100, 255, 0.3); }
+}
+
+@keyframes border-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes scroll-indicator {
+  0% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0.3; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
