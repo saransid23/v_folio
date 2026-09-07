@@ -14,7 +14,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const stickyNameRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Check initially
+    if (typeof window !== "undefined") {
+      checkMobile();
+      window.addEventListener("resize", checkMobile);
+    }
+    
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", checkMobile);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -34,7 +53,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (loading) return;
+    if (loading || isMobile) return;
 
     // Show the sticky name on the bottom left starting from the next page
     const trigger = ScrollTrigger.create({
@@ -51,7 +70,35 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     return () => {
       trigger.kill();
     };
-  }, [loading]);
+  }, [loading, isMobile]);
+
+  if (isMobile) {
+    return (
+      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black text-white px-6 text-center h-[100dvh] w-screen">
+        <div className="mb-6">
+          <svg
+            className="w-16 h-16 mx-auto text-white/80"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1}
+              d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            />
+          </svg>
+        </div>
+        <h2 className="text-xl font-black uppercase tracking-[0.2em] mb-4">
+          Desktop Only
+        </h2>
+        <p className="text-xs font-light text-white/60 tracking-wider leading-relaxed max-w-[280px]">
+          This portfolio is designed for larger screens. Please open it on a laptop or PC for the best experience.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>

@@ -47,6 +47,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable} dark`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.history.scrollRestoration = 'manual';
+              window.scrollTo(0, 0);
+            `,
+          }}
+        />
+      </head>
       <body className="antialiased min-h-full flex flex-col">
         <AppLayout>{children}</AppLayout>
       </body>
