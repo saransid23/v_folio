@@ -79,8 +79,6 @@ export default function Contact() {
                 <a href={PERSONAL.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors duration-300">instagram</a>
                 <span className="opacity-30">/</span>
                 <a href={PERSONAL.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors duration-300">linkedin</a>
-                <span className="opacity-30">/</span>
-                <a href={PERSONAL.behance} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors duration-300">behance</a>
               </div>
             </SectionReveal>
 

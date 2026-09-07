@@ -13,7 +13,6 @@ export const PERSONAL = {
   github: "https://github.com/saransid23",
   linkedin: "https://www.linkedin.com/in/saran-siddarth-s-b49662371?utm_source=share_via&utm_content=profile&utm_medium=member_android",
   instagram: "https://instagram.com",
-  behance: "https://behance.net",
   twitter: "https://twitter.com",
   available: true,
 };
