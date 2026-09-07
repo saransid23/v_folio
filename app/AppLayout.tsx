@@ -74,10 +74,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   if (isMobile) {
     return (
-      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black text-white px-6 text-center h-[100dvh] w-screen">
+      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#D60001] text-white px-6 text-center h-[100dvh] w-screen">
         <div className="mb-6">
           <svg
-            className="w-16 h-16 mx-auto text-white/80"
+            className="w-16 h-16 mx-auto text-white"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -93,7 +93,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <h2 className="text-xl font-black uppercase tracking-[0.2em] mb-4">
           Desktop Only
         </h2>
-        <p className="text-xs font-light text-white/60 tracking-wider leading-relaxed max-w-[280px]">
+        <p className="text-xs font-light text-white/80 tracking-wider leading-relaxed max-w-[280px]">
           This portfolio is designed for larger screens. Please open it on a laptop or PC for the best experience.
         </p>
       </div>
