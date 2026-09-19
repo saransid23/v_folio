@@ -71,4 +71,3 @@ The site content is designed to be easily updatable. All the textual data, video
 
 ---
 
-> Designed and built for Saran Siddarth.
