@@ -1,4 +1,4 @@
-# Saran Siddarth — Cinematic Portfolio
+# Saran Siddarth  Cinematic Portfolio
 
 A premium, high-performance video editing and cinematography portfolio website. Built with Next.js and designed to deliver a smooth, cinematic, and immersive user experience with advanced scroll animations.
 
