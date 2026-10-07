@@ -79,10 +79,6 @@ export default function Services() {
         {/* Section Header */}
         <SectionReveal>
           <div className="flex flex-col items-center text-center mb-16">
-            <span className="inline-flex items-center gap-2 font-mono text-[10px] md:text-[11px] tracking-[0.35em] uppercase text-white/70 bg-black/30 px-4 py-1.5 rounded-full border border-white/10 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-              Capabilities & Craft
-            </span>
             <h2 className="font-sans font-black text-[40px] md:text-[60px] lg:text-[72px] text-white uppercase tracking-tighter leading-none mb-6">
               What I Deliver
             </h2>
