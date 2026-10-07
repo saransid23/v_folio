@@ -30,66 +30,51 @@ export default function Contact() {
       {/* Background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Contact content — top portion */}
-      <div className="w-full max-w-7xl mx-auto relative z-10 flex-1 flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-stretch w-full">
-          {/* Portrait */}
-          <SectionReveal delay={0.1}>
-            <div className="relative h-[50vh] lg:h-[70vh] overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/portrait.png"
-                alt="Saran Siddarth"
-                className="w-full h-full object-cover object-top"
-              />
+      {/* Contact content */}
+      <div className="w-full max-w-4xl mx-auto relative z-10 flex-1 flex items-center justify-center py-12 md:py-20">
+        <div className="flex flex-col items-center text-center gap-8 w-full">
+          <SectionReveal>
+            <span className="font-sans text-[10px] tracking-[0.4em] uppercase text-white/60 mb-2 block">
+              get in touch
+            </span>
+          </SectionReveal>
+
+          <SectionReveal delay={0.15}>
+            <h2 className="font-sans font-black text-[36px] md:text-[60px] lg:text-[76px] text-white uppercase leading-[0.95] tracking-tighter select-none">
+              let&apos;s create<br />something{" "}
+              <span className="font-display italic font-normal text-black">extraordinary</span>
+            </h2>
+          </SectionReveal>
+
+          <ScrollTextHighlight
+            text="Ready to bring your vision to life? Whether it's a brand film, a creative project, or just an idea worth exploring — let's talk."
+            className="font-sans text-[14px] md:text-[16px] leading-relaxed max-w-xl font-light text-center"
+          />
+
+          <SectionReveal delay={0.3}>
+            <a
+              href={`mailto:${PERSONAL.email}`}
+              className="font-sans font-bold text-[22px] md:text-[36px] text-white hover:text-black border-b border-white/40 hover:border-black transition-all duration-300 pb-2 lowercase inline-block my-2"
+            >
+              {PERSONAL.email}
+            </a>
+          </SectionReveal>
+
+          <SectionReveal delay={0.35}>
+            <div className="flex items-center gap-8 font-sans text-[11px] md:text-[13px] font-bold uppercase tracking-[0.2em] text-white/80">
+              <a href={PERSONAL.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors duration-300">instagram</a>
+              <span className="opacity-30">/</span>
+              <a href={PERSONAL.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors duration-300">linkedin</a>
             </div>
           </SectionReveal>
 
-          {/* Right content */}
-          <div className="flex flex-col justify-center gap-8 py-8 lg:py-12">
-            <SectionReveal>
-              <span className="font-sans text-[10px] tracking-[0.4em] uppercase text-white/60 mb-2 block">
-                get in touch
-              </span>
-            </SectionReveal>
-
-            <SectionReveal delay={0.15}>
-              <h2 className="font-sans font-black text-[36px] md:text-[52px] lg:text-[64px] text-white uppercase leading-[0.9] tracking-tighter select-none">
-                let&apos;s create<br />something{" "}
-                <span className="font-display italic font-normal text-black">extraordinary</span>
-              </h2>
-            </SectionReveal>
-
-            <ScrollTextHighlight
-              text="Ready to bring your vision to life? Whether it's a brand film, a creative project, or just an idea worth exploring  let's talk."
-              className="font-sans text-[13px] md:text-[15px] leading-relaxed max-w-lg font-light"
-            />
-
-            <SectionReveal delay={0.3}>
-              <a
-                href={`mailto:${PERSONAL.email}`}
-                className="font-sans font-bold text-[20px] md:text-[30px] text-white hover:text-black border-b border-white/40 hover:border-black transition-all duration-300 pb-2 lowercase inline-block"
-              >
-                {PERSONAL.email}
-              </a>
-            </SectionReveal>
-
-            <SectionReveal delay={0.35}>
-              <div className="flex items-center gap-8 font-sans text-[11px] md:text-[13px] font-bold uppercase tracking-[0.2em] text-white/80">
-                <a href={PERSONAL.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors duration-300">instagram</a>
-                <span className="opacity-30">/</span>
-                <a href={PERSONAL.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors duration-300">linkedin</a>
-              </div>
-            </SectionReveal>
-
-            <SectionReveal delay={0.4}>
-              <div className="mt-4 pt-6 border-t border-white/15">
-                <p className="font-sans text-[10px] uppercase tracking-[0.35em] text-white/40">
-                  {PERSONAL.location} · Available for freelance
-                </p>
-              </div>
-            </SectionReveal>
-          </div>
+          <SectionReveal delay={0.4}>
+            <div className="mt-6 pt-6 border-t border-white/15 w-full max-w-xs">
+              <p className="font-sans text-[10px] uppercase tracking-[0.35em] text-white/40">
+                {PERSONAL.location} · Available for freelance
+              </p>
+            </div>
+          </SectionReveal>
         </div>
       </div>
     </section>
