@@ -70,29 +70,33 @@ export const SERVICES = [
     id: "filmmaking",
     title: "FILMMAKING",
     description:
-      "Full-scale cinematic production from concept to final cut. Features, shorts, documentaries, and experimental work.",
+      "Full-scale cinematic production from concept to final cut. Features, shorts, commercials, and documentary projects.",
     icon: "Film",
+    tags: ["Directing", "Cinematography", "Commercials", "Documentary"],
   },
   {
-    id: "video editing",
+    id: "video-editing",
     title: "VIDEO EDITING",
     description:
-      "Narrative first editing that finds the story in the footage. Pacing, rhythm, tension every cut is intentional.",
+      "Narrative-first editing that finds the emotional heart in raw footage. Pacing, rhythm, sound design, and intentional cuts.",
     icon: "Scissors",
+    tags: ["Narrative Cut", "Pacing & Rhythm", "Sound Design", "VFX Assembly"],
   },
   {
     id: "color-grading",
     title: "COLOR GRADING",
     description:
-      "Signature cinematic color work in DaVinci Resolve. From naturalistic grades to bold, stylized looks.",
+      "Signature cinematic color grading in DaVinci Resolve. From organic film looks to bold, stylized color signatures.",
     icon: "Palette",
+    tags: ["DaVinci Resolve", "Color Matching", "Film Emulation", "HDR Finishing"],
   },
   {
     id: "short-films",
     title: "SHORT FILMS",
     description:
-      "Self initiated and collaborative short form fiction. The proving ground for every visual idea I want to push further.",
+      "Self-initiated and collaborative short fiction. Pushing narrative boundaries, experimental framing, and mood.",
     icon: "Aperture",
+    tags: ["Creative Direction", "Visual Storytelling", "Mood & Ambience", "Festival Edit"],
   },
 ];
 
